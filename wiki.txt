@@ -28,7 +28,7 @@
 
 ### URL for webhook:
 
-https://hooks.slack.com/services/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
+https://hooks.slack.com/services/################################################
 
 
 there are detailed instructions here
