@@ -1,0 +1,85 @@
+## images and notes to write dev.to blog
+
+### working titles:
+-how to make a slack/github bot / slackapp
+-getting experience with your first upwork contract
+
+
+### documentation to learn how to do this:
+
+-https://www.serverless.com/blog/serverless-github-webhook-slack
+
+### the upwork job inspiration:
+-https://www.upwork.com/ab/find-work/domestic/details/~01490a1f4e9991a742
+
+
+### images of the process to upgrade your blog:
+
+##### connect new app to slack channel  
+ - https://i.imgur.com/FaGr4q1.png
+
+##### search incoming webhook
+ - https://i.imgur.com/NaZFMIA.png
+	-hit add to slack
+	-select the channel to post to
+	-add integration
+
+
+
+### URL for webhook:
+
+https://hooks.slack.com/services/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
+
+
+there are detailed instructions here
+make sure to save the url youll need it to connect github to this channel
+
+mvp:
+#### product specs aka mvp requirements:
+
+-a slack app you can install
+
+-its a bot that sends you messages anytime a selected github action happens
+-- example any new:
+ star, issue, fork, commit, pr, follow, unfollow etc
+
+#### user can 
+- turn on/off specific notifications and 
+- select/unselect which repos they happen for
+
+for the frontend/view layer:
+-use the builtin slack workflow modals to accomplish the actual UI -not a traditional React Frontend webapp / View layer
+
+- will use"
+ Node.js | Netlify serverless stuff | GCP cloud | Github-Actions
+
+- node 
+- netlify forms
+- GCP cloud sql mysql database
+- netlify serverless functions
+
+
+
+steps :
+
+-create a new slack org
+-create a new slack channel
+-in the channel select " (+) add new slack plugin/ connection "
+- record the URL webhook generated
+- customize the message for now--id name|icon|message
+- create repo
+
+-deploy serverless webhook
+||setup webhook handler function| parse event for info| integrate info into slack using webhook URL||
+
+-setup Github WatchEvent  https://developer.github.com/v3/activity/events/types/#watchevent
+
+for the new repo star message the info needed looks like
+- repo being starred
+- total total stars for repo
+- the username starring repo
+- URL to users github
+
+
+
+
