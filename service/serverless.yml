@@ -1,0 +1,12 @@
+service: stargazer
+provider:
+  name: aws
+  runtime: nodejs8.0
+  environment:
+    WEBHOOK_URL: ${env:WEBHOOK_URL}
+
+  function:
+    stargazer:
+      handler: handler.stargazer
+      events:
+          - http: POST stargazer

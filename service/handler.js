@@ -1,19 +1,42 @@
-'use strict';
+"use strict";
 
-const request= require('sync-request');
+const request = require("sync-request");
 
-const WEBHOOK_URL= process.env.WEBHOOK_URL;
+const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
-module.exports.star_added=(event,context,callback)=>{
-const body = JSON.parse(event.body)
+module.exports.stargazer = (event, context, callback) => {
+  const body = JSON.parse(event.body);
 
-console.log({body});
-const { repository,sender}= body;
+  const { repository, sender } = body;
 
-const repo= repository.name;
+  const repo = repository.name;
+  const stars = repository.stargazers_count;
+  const username = sender.login;
+  const url = sender.html_url;
+  try {
+    sendToSlack(repo, stars, username, url);
+  } catch (err) {
+    console.log(err);
+    callback(err);
+  }
 
-const stars=repository.stargazers_count;
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: "Event processed",
+    }),
+  };
+  callback(null, response);
+};
 
-
-}
-
+const sendToSlack = (repo, stars, username, url) => {
+  const text = [
+    `New Github star for _${repo}_ repo!.\n
+        The *${repo}* repo now has *${stars}* stars! :tada:.\n
+        Your new fan is <${url}|${username}>`,
+  ];
+  const resp = request("POST", WEBHOOK_URL, {
+    json: { text },
+  });
+  resp.getBody();
+};
